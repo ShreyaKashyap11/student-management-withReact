@@ -1,0 +1,36 @@
+package com.example.student.service;
+import com.example.student.model.Student;
+import com.example.student.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.steryotype.Service;
+
+
+@Service
+public class StudentServiceImpl implements StudentService{
+	@Autowired
+	private StudentRepository studentRepository;
+	
+	@Override
+	public Student createStudent(Student student) {
+		return studentRepository.save(studnet);
+	}
+	
+	@Override
+	public Student getStudentById(Long id) {
+		return studentRepository.findById(id);
+	}
+	
+	@Override
+	public List<Student> getAllStudents(){
+		return studentRepository.findAll();
+	}
+	
+	@Override
+	public Student updateStudent(Long id ,Student studentDetails) {
+		Student student=studentRepository.findAll(id)
+				.orElseThrow(()->new RuntimeException("Student not found with id : "+id));
+		
+		student.setFirstName(studentDetails.getFirstName());
+		student.setLastName(studentDetails.getLastName());
+	}
+}
